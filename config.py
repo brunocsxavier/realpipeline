@@ -10,6 +10,8 @@ import os
 # Modo debug ativo — nunca deve ir para produção
 DEBUG = True
 
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 DB_HOST  = os.getenv("DB_HOST","localhost")
 DB_USER = os.getenv("DB_USER","admin")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
