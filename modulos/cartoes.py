@@ -26,4 +26,4 @@ def buscar_cartoes_cliente():
     cpf = request.args.get("cpf")
     conn = sqlite3.connect("cartoes.db")
     sql = f"SELECT * FROM cartoes WHERE cpf_titular = ?"
-    return conn.execute(sql), (cpf,)). fetchall()
+    return conn.execute(sql, (cpf,)). fetchall()
