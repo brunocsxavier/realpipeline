@@ -120,38 +120,33 @@ jobs:
       - name: Trivy - bloqueia em CRITICAL/HIGH
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           scan-type: 'fs'
           scan-ref: '.'
           scanners: 'vuln'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
-          ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-image-results.sarif'
+          format: 'table'
+          
 
       - name: Trivy - relatorio informativo (nao bloqueia)
         if: always()
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          scan-type: 'image'
+          scan-type: 'fs'
           scan-ref: '.'
-          severity: 'MEDIUM,LOW'
+          format: 'sarif'
+          output: 'trivy-fs-results.sarif'
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
           exit-code: '0'
-          format: 'table'
+          
 
       - name: Publicar relatorio do Trivy
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
-          exit-code: '0'
-          name: relatorio-trivy-dependencias
+          name: trivy-fs-results
           path: trivy-fs-results.sarif
-          if-no-files-found: ignore
+          if-no-files-found: warn
 
   # ============================================================
   # ESTACAO 5 - PACKAGE
