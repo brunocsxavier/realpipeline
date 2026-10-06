@@ -120,19 +120,19 @@ jobs:
       - name: Trivy - bloqueia em CRITICAL/HIGH
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          scan-type: 'fs'
+          scan-type: 'image'
           scan-ref: '.'
           scanners: 'vuln'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
           format: 'sarif'
-          output: 'trivy-fs-results.sarif'
+          output: 'trivy-image-results.sarif'
 
       - name: Trivy - relatorio informativo (nao bloqueia)
         if: always()
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          scan-type: 'fs'
+          scan-type: 'image'
           scan-ref: '.'
           severity: 'MEDIUM,LOW'
           exit-code: '0'
