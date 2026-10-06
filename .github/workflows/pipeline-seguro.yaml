@@ -173,13 +173,12 @@ jobs:
         with:
           context: .
           push: true
-          
+          no-cache: true
+          pull: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          =gha,mode=max
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          
 
   # ============================================================
   # ESTACAO 6 - SCAN DA IMAGEM (Trivy)
