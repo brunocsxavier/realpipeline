@@ -230,11 +230,10 @@ jobs:
           mkdir -p zap-report && chmod 777 zap-report
           docker run --rm --network host \
             -v $(pwd)/zap-report:/zap/wrk/:rw \
-            -v $(pwd)/.zap/rules.tsv:/zap/rules.tsv:ro \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py -t http://localhost:5000 \
               -r zap-report.html -J zap-report.json \
-              -c /zap/rules.tsv -I
+              -I
         continue-on-error: true
 
       - name: Avaliar a politica de portao do DAST (bloqueia em risco ALTO)
