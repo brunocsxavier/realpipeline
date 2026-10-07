@@ -198,7 +198,7 @@ jobs:
           ignore-unfixed: true
           exit-code: '1'
           format: 'table'
-          
+          trivy-version: '0.75.0'
 
   # ============================================================
   # ESTACAO 7 - DEPLOY EM HOMOLOGACAO + DAST (OWASP ZAP)
