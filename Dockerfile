@@ -18,8 +18,7 @@ RUN apt-get update \
  
 COPY requirements.txt .
  
-RUN python -m pip install --no-cache-dir --upgrade pip "setuptools>=78.1.1" wheel "msgpack>=1.2.1" \
-&& pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
  
 COPY . .
  
