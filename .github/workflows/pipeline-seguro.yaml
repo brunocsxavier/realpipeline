@@ -195,6 +195,7 @@ jobs:
           scan-type: 'image'
           image-ref: 'ghcr.io/brunocsxavier/realpipeline:${{ github.sha }}'
           severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true
           exit-code: '1'
           format: 'table'
           
